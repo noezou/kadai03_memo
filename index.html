@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ロールプレイ用グループ分け</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <main style="display: none">
+      <textarea id="text_area"></textarea>
+      <ul>
+        <li id="save">Save</li>
+        <li id="clear">Clear</li>
+      </ul>
+
+      <h1>参加者整列のアニメーション表示</h1>
+      <h2>10人ごとに折り返します</h2>
+      <label for="numParticipants"
+        >参加人数（9人以上）を選択してください:</label
+      >
+      <input type="number" id="numParticipants" min="9" step="1" />
+
+      <button onclick="startAnimation()">整列開始</button>
+      <div id="canvas"></div>
+      <audio id="sound" src="./sound/footsteps.mp3" preload="auto"></audio>
+
+      <div id="firstDivide">
+        <h1>ロールプレイ用に、3人1組のグループに分ける</h1>
+        <!-- <div id="tableContainer"></div> -->
+        <h2>1回目のグループ分け：ランダムに分ける</h2>
+        <button onclick="generateGrid()" id="generateGrid">
+          1回目のグループを生成します
+        </button>
+        <div id="tableContainer"></div>
+        <!-- <table id="result-table1">
+        <thead>
+          <tr>
+            <th>参加者番号</th>
+            <th>1回目のグループ番号</th>
+            <th>1回目の役割</th>
+            <th>2回目のグループ番号</th>
+            <th>2回目の役割</th>
+            <th>3回目のグループ番号</th>
+            <th>3回目の役割</th>
+          </tr>
+        </thead>
+        <tbody id="result-body1"></tbody>
+      </table> -->
+      </div>
+      <!-- end of 1回目 -->
+
+      <div id="secondDivide">
+        <h2>2回目のグループ分け：2列目を下にずらします</h2>
+        <button onclick="shiftSecondColumn()" id="shiftSecondColumn">
+          2回目のグループを生成します
+        </button>
+        <!-- <div id="tableContainer2"></div> -->
+      </div>
+      <!-- end of 2回目 -->
+
+      <div id="thirdDivide">
+        <h2>3回目のグループ分け：3列目を上にずらします</h2>
+        <button onclick="shiftThirdColumn()" id="shiftThirdColumn">
+          3回目のグループを生成します
+        </button>
+        <!-- <div id="tableContainer3"></div> -->
+      </div>
+      <!-- end of 3回目 -->
+
+      <!-- <div id="controls" style="display: none">
+        <button id="secondRoundButton">2回目</button>
+        <button id="thirdRoundButton">3回目</button>
+      </div> -->
+
+      <!-- <div id="result"></div>
+      <h2>グループごとの結果</h2>
+      <div id="groupOutput"></div>
+
+      <h2>参加者ごとの詳細</h2>
+      <div id="participantOutput"></div>
+
+      <button id="downloadCsvButton" style="display: none">
+        CSVをダウンロード
+      </button> -->
+
+      <!-- <button id="round1-btn" disabled>1回目グループ分け</button>
+      <button id="round2-btn" disabled>2回目グループ分け</button>
+      <button id="round3-btn" disabled>3回目グループ分け</button> -->
+      <!-- <button id="download-csv" disabled>結果をCSVでダウンロード</button> -->
+      <!-- <table id="result-table">
+        <thead>
+          <tr>
+            <th>参加者番号</th>
+            <th>1回目のグループ番号</th>
+            <th>1回目の役割</th>
+            <th>2回目のグループ番号</th>
+            <th>2回目の役割</th>
+            <th>3回目のグループ番号</th>
+            <th>3回目の役割</th>
+          </tr>
+        </thead>
+        <tbody id="result-body"></tbody>
+      </table> -->
+    </main>
+    <footer></footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 必ず自分で作成した test.jsよりも上に貼り付ける -->
+    <script src="./js/script.js"></script>
+    <script src="./js/roleplay.js"></script>
+  </body>
+</html>
