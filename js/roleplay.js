@@ -49,11 +49,10 @@ console.dir("配列としてのnumbers初期値：", numbers);
 //
 let participants = [];
 
-// ナンバーをランダムに並べ替える
+// ナンバーをFisher–Yates shuffle法でランダムに並べ替える
 
 let len = array.length;
-// for (let i = len - 1; i > 0; i--) {
-for (let i = 0; i < group_num; i++) {
+for (let i = len - 1; i > 0; i--) {
   let j = Math.floor(Math.random() * (i + 1));
   let tmp = array[i];
   array[i] = array[j];
