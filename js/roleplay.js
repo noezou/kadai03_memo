@@ -28,10 +28,11 @@ const numParticipants = parseInt(
   document.getElementById("numParticipants").value
 );
 
-let roles = ["speaker", "listener", "observer"];
-let roles_num = Array.from(length, roles);
-console.log(roles);
-console.log(roles_num);
+// let roles = ["speaker", "listener", "observer"];
+// let roles_num = Array.from(length, roles);
+// console.log(roles);
+// console.log(roles_num);
+
 // let currentRound = 0;
 // let groupAssignments = [];
 
