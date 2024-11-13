@@ -48,7 +48,7 @@ let numbers = Array.from({ length: numParticipants }, (_, i) => i + 1);
 console.dir("配列としてのnumbers初期値：", numbers);
 
 //
-let participants = [];
+// let participants = [];
 
 // ナンバーをFisher–Yates shuffle法でランダムに並べ替える
 
