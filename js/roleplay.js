@@ -23,54 +23,83 @@ if (localStorage.getItem("memo")) {
   $("#text_area").val(value);
 }
 
-// 選択された参加人数
+// 選択された数字を参加人数と
 const numParticipants = parseInt(
   document.getElementById("numParticipants").value
 );
 
-let participants = [];
 let roles = ["speaker", "listener", "observer"];
-let currentRound = 0;
-let groupAssignments = [];
+let roles_num = Array.from(length, roles);
+console.log(roles);
+console.log(roles_num);
+// let currentRound = 0;
+// let groupAssignments = [];
 
 // 参加者数を3で割った整数値＝グループの数＝表の行数
 const group_num = Math.floor(numParticipants / 3);
 // グループの最大人数＝表の列数＝4 参加者が3の倍数でなかった場合は、observerに1人ずつ加え4人1組とする。
 const group_size_max = 4;
+// 余りを算出する （0,1,2のいずれかになる）
+const remainder = numParticipants % 3;
+
+// 参加者数の分、ナンバーを用意
+let numbers = Array.from({ length: numParticipants }, (_, i) => i + 1);
+console.dir("配列としてのnumbers初期値：", numbers);
+
+//
+let participants = [];
+
+// ナンバーをランダムに並べ替える
+
+let len = array.length;
+// for (let i = len - 1; i > 0; i--) {
+for (let i = 0; i < group_num; i++) {
+  let j = Math.floor(Math.random() * (i + 1));
+  let tmp = array[i];
+  array[i] = array[j];
+  array[j] = tmp;
+}
+
+// numbers = numbers.sort(() => Math.random() - 0.5);
+
+console.log("ランダムに入れ替えた後のnumbers：", numbers);
+
+// 数字の並びを、配列に入れる
+let count = 0;
+
+for (let j = 0; j < group_size_max; j++) {
+  const cell = numbers[count++];
+}
 
 // 関数
-function generateGrid() {
-  // 参加者にナンバーを振る
-  let numbers = Array.from({ length: numParticipants }, (_, i) => i + 1);
+// function generateGrid() {
 
-  // ランダムに並べ替える
-  numbers = numbers.sort(() => Math.random() - 0.5);
+//   // ＊＊＊表を生成＊＊＊
+//   // ID値 tableContainer に一致する要素を返す
+//   const tableContainer = document.getElementById("tableContainer");
+//   tableContainer.innerHTML = ""; // 表の中身をクリア
+// document.createElement(tagName) 引数のtagNameで指定されたHTML要素を生成する
 
-  // ＊＊＊表を生成＊＊＊
-  // ID値 tableContainer に一致する要素を返す
-  const tableContainer = document.getElementById("tableContainer");
-  tableContainer.innerHTML = ""; // 表の中身をクリア
-  // document.createElement(tagName) 引数のtagNameで指定されたHTML要素を生成する
-  const table = document.createElement("table"); // table要素を生成
-  table.style.borderCollapse = "collapse";
-  table.id = "generatedTable"; // テーブルにIDを付与
+// const table = document.createElement("table"); // table要素を生成
+// table.style.borderCollapse = "collapse";
+// table.id = "generatedTable"; // テーブルにIDを付与
 
-  // 表を書く
-  let count = 0;
-  for (let i = 0; i < group_num; i++) {
-    const row = document.createElement("tr");
-    for (let j = 0; j < group_size_max; j++) {
-      const cell = document.createElement("td");
-      cell.style.border = "1px solid black";
-      cell.style.padding = "10px";
-      cell.style.textAlign = "center";
-      cell.innerHTML = numbers[count++];
-      row.appendChild(cell); // cellの最後の要素としてrowに追加
-    }
-    table.appendChild(row); // rowの最後の要素としてtableに追加
-  }
-  tableContainer.appendChild(table); // 表をtableContainerに追加
-}
+// 表を書く
+//   let count = 0;
+//   for (let i = 0; i < group_num; i++) {
+//     const row = document.createElement("tr");
+//     for (let j = 0; j < group_size_max; j++) {
+//       const cell = document.createElement("td");
+//       cell.style.border = "1px solid black";
+//       cell.style.padding = "10px";
+//       cell.style.textAlign = "center";
+//       cell.innerHTML = numbers[count++];
+//       row.appendChild(cell); // cellの最後の要素としてrowに追加
+//     }
+//     table.appendChild(row); // rowの最後の要素としてtableに追加
+//   }
+//   tableContainer.appendChild(table); // 表をtableContainerに追加
+// }
 
 // 2回目
 function shiftSecondColumn() {
