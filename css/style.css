@@ -25,10 +25,19 @@
   }
 }
 
+.flex-container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
 body {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
   text-align: center;
-  font-size: 16pt;
+  font-size: 24pt;
   margin: 20px;
 }
 
@@ -40,22 +49,75 @@ body {
   margin-bottom: 20px;
 }
 
-input[type="number"] {
-  width: 50px;
-  height: 25px;
-  font-size: 14pt;
-  margin-right: 10px;
-}
-
 button {
   padding: 10px 20px;
-  font-size: 14pt;
+  font-size: 20pt;
   margin-right: 10px;
 }
 
+header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+main {
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+footer {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+p {
+  font-size: 200%;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+  height: 200px;
+}
+
+ul {
+  padding: 0;
+  border-top: 1px solid #000000;
+  display: flex;
+  /* 定義 */
+  /* table-layout: fixed; */
+  width: 100%;
+}
+
+li {
+  list-style-type: none;
+  border: 1px solid #666;
+  background-color: #fff;
+  display: flex;
+  /* cursor: pointer;1px */
+}
+
+li:hover {
+  background: #0066cc;
+  color: #fff;
+}
+textarea {
+  margin: 3%;
+  width: 95%;
+  height: 100px;
+  font-size: 100%;
+  box-shadow: 3px 3px 3px 3px #555;
+}
+
+input[type="text"] {
+  margin: 3%;
+  width: 95%;
+  height: 80%;
+  font-size: 80%;
+  box-shadow: 3px 3px 3px 3px #555;
+}
+
 input[type="number"] {
-  width: 50px;
-  height: 25px;
+  width: 100px;
+  height: 50px;
+  font-size: 20pt;
+  margin-left: 10px;
   margin-right: 10px;
 }
 
@@ -66,19 +128,20 @@ input[type="number"] {
 table {
   display: inline;
   width: 50%;
-  border-collapse: collapse;
+  border-start-start-radius: 10%;
   align-items: center;
   margin-top: 20px;
 }
 
 th,
 td {
-  border: 1px solid #ddd;
+  border: 1px solid #1d2cf9;
   padding: 8px;
+  margin-right: 20px;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #f2f2f26d;
 }
 
 /* #tableContainer {

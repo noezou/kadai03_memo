@@ -24,9 +24,9 @@ if (localStorage.getItem("memo")) {
 }
 
 // 選択された数字を参加人数と
-const numParticipants = parseInt(
-  document.getElementById("numParticipants").value
-);
+// const numParticipants = parseInt(
+//   document.getElementById("numParticipants").value
+// );
 
 // let roles = ["speaker", "listener", "observer"];
 // let roles_num = Array.from(length, roles);
@@ -45,15 +45,15 @@ const remainder = numParticipants % 3;
 
 // 参加者数の分、ナンバーを用意
 let numbers = Array.from({ length: numParticipants }, (_, i) => i + 1);
-console.dir("配列としてのnumbers初期値：", numbers);
+console.log("配列としてのnumbers初期値：", numbers);
 
 //
 // let participants = [];
 
 // ナンバーをFisher–Yates shuffle法でランダムに並べ替える
 
-let len = array.length;
-for (let i = len - 1; i > 0; i--) {
+// let len = array.length;
+for (let i = numbers - 1; i > 0; i--) {
   let j = Math.floor(Math.random() * (i + 1));
   let tmp = array[i];
   array[i] = array[j];
