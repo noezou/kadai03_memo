@@ -10,23 +10,29 @@
   </head>
   <body>
     <main style="display: none">
+      <!--
       <textarea id="textArea" placeholder="めも"></textarea>
       <div class="inputArea">
         <input id="title" type="text" placeholder="タイトルを入力" />
         <textarea id="text" placeholder="本文を入力"></textarea>
       </div>
+    -->
 
+      <!--
       <div class="buttonArea">
         <button id="save_memo">memoだけセーブ</button>
         <button id="save">タイトルと内容をセーブ</button>
         <button id="clear_memo">memoだけ削除</button>
         <button id="clear">全て削除</button>
       </div>
+    -->
 
       <ul id="list">
         <!-- localStorageにあるデータをlistというidで紐づけてHTML表示させる -->
         <!-- ここに追加データが挿入される -->
       </ul>
+
+      <!--
       <table id="key_and_value_output">
         <thead>
           <tr>
@@ -35,26 +41,32 @@
           </tr>
         </thead>
       </table>
+    -->
 
+      <!--
       <h1>参加者整列のアニメーション表示</h1>
       <h2>10人ごとに折り返します</h2>
+      -->
+      <h1>ロールプレイ用に、3人1組のグループに分けるプログラムです。</h1>
+
       <label for="numParticipants">参加人数（9人以上）を選択してください</label>
-      <input type="number" id="numParticipants" min="9" step="1" />
+      <input type="number" id="numParticipants" min="9" step="3" />
+
       <!-- 
       <button onclick="startAnimation()">整列開始</button>
       <div id="canvas"></div>
       <audio id="sound" src="./sound/footsteps.mp3" preload="auto"></audio>
  -->
+
       <div id="firstDivide">
-        <h1>ロールプレイ用に、3人1組のグループに分ける</h1>
         <!-- <div id="tableContainer"></div> -->
         <h2>1回目のグループ分け：ランダムに分ける</h2>
         <button onclick="generateGrid()" id="generateGrid">
           1回目のグループを生成します
         </button>
         <br />
-        <!-- <div id="tableContainer"></div> -->
-        <table id="tableContainer">
+        <div id="tableContainer"></div>
+        <!-- <table id="tableContainer">
           <thead>
             <tr>
               <th>話し手:speaker</th>
@@ -63,7 +75,7 @@
             </tr>
           </thead>
           <tbody id="tableContainerBody"></tbody>
-        </table>
+        </table> -->
       </div>
       <!-- end of 1回目 -->
 

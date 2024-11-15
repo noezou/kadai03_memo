@@ -1,3 +1,18 @@
+header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+main {
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+footer {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
 #canvas {
   position: relative;
   width: 100%;
@@ -55,20 +70,6 @@ button {
   margin-right: 10px;
 }
 
-header {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  text-align: center;
-}
-main {
-  border-bottom: 1px solid #ccc;
-  position: relative;
-}
-footer {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  text-align: center;
-}
 p {
   font-size: 200%;
   text-align: center;

@@ -58,7 +58,7 @@ for (let i = 0; i < localStorage.length; i++) {
       </li>
       <br>
     `;
-  $("#list").append(html);
+  $("#key_and_value_output").append(html);
 }
 
 // localStorageの中にmemoという名前が存在していれば、
@@ -70,12 +70,12 @@ if (localStorage.getItem("memo")) {
 }
 
 // localStorageの中にデータが存在していれば、
-if (localStorage.getItem(key)) {
-  // key_and_value_outputがあれば、key_and_value_outputから値を取得して、変数valueに代入する
-  value = localStorage.getItem(value);
-  // 変数valueの中身をlistに表示する
-  $("#key_and_value_output").val(key, value);
-}
+// if (localStorage.getItem(key)) {
+//   // key_and_value_outputがあれば、key_and_value_outputから値を取得して、変数valueに代入する
+//   value = localStorage.getItem(value);
+//   // 変数valueの中身をlistに表示する
+//   $("#key_and_value_output").val(key, value);
+// }
 
 // 選択された数字を参加人数と
 // const numParticipants = parseInt(
@@ -103,10 +103,10 @@ console.log("配列としてのnumbers初期値：", numbers);
 
 //
 // let participants = [];
+// let len = array.length;
 
 // ナンバーをFisher–Yates shuffle法でランダムに並べ替える
 
-// let len = array.length;
 for (let i = numbers - 1; i > 0; i--) {
   let j = Math.floor(Math.random() * (i + 1));
   let tmp = array[i];
