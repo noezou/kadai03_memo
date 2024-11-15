@@ -49,8 +49,23 @@
       -->
       <h1>ロールプレイ用に、3人1組のグループに分けるプログラムです。</h1>
 
-      <label for="numParticipants">参加人数（9人以上）を選択してください</label>
-      <input type="number" id="numParticipants" min="9" step="3" />
+      <label for="numParticipants">参加者数（9人以上）を選択してください</label>
+      <input
+        type="number"
+        id="numParticipants"
+        placeholder="3の倍数"
+        min="9"
+        step="3"
+      />
+      <div class="buttonArea">
+        <button onclick="saveArray_0()">初期値を保存</button>
+        <button id="save_memo">memoだけセーブ</button>
+        <button id="save">タイトルと内容をセーブ</button>
+        <button id="clear_memo">memoだけ削除</button>
+        <button id="clear">全て削除</button>
+      </div>
+
+      <div id="initialValue">保存した初期値を表示します:</div>
 
       <!-- 
       <button onclick="startAnimation()">整列開始</button>
@@ -60,12 +75,13 @@
 
       <div id="firstDivide">
         <!-- <div id="tableContainer"></div> -->
-        <h2>1回目のグループ分け：ランダムに分ける</h2>
+        <h2>1回目のグループ分け:ランダムに分ける</h2>
         <button onclick="generateGrid()" id="generateGrid">
           1回目のグループを生成します
         </button>
         <br />
         <div id="tableContainer"></div>
+        <!-- <div id="tableContainer"></div> -->
         <!-- <table id="tableContainer">
           <thead>
             <tr>
@@ -80,20 +96,22 @@
       <!-- end of 1回目 -->
 
       <div id="secondDivide">
-        <h2>2回目のグループ分け：2列目を下にずらします</h2>
+        <h2>2回目のグループ分け:2列目を下にずらします</h2>
         <button onclick="shiftSecondColumn()" id="shiftSecondColumn">
           2回目のグループを生成します
         </button>
         <!-- <div id="tableContainer2"></div> -->
+        <div id="tableContainer2"></div>
       </div>
       <!-- end of 2回目 -->
 
       <div id="thirdDivide">
-        <h2>3回目のグループ分け：3列目を上にずらします</h2>
+        <h2>3回目のグループ分け:3列目を上にずらします</h2>
         <button onclick="shiftThirdColumn()" id="shiftThirdColumn">
           3回目のグループを生成します
         </button>
         <!-- <div id="tableContainer3"></div> -->
+        <div id="tableContainer3"></div>
       </div>
       <!-- end of 3回目 -->
 

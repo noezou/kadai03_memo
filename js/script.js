@@ -1,5 +1,46 @@
 $("main").slideDown(500);
 
+function saveArray_0() {
+  // 入力値を取得し数値に変換
+  const inputElement = document.getElementById("numParticipants");
+  const inputValue = parseInt(inputElement.value, 10);
+
+  // 入力値が有効な数値でない場合は処理を終了
+  if (isNaN(inputValue) || inputValue <= 0) {
+    alert("正しい数値を入力してください");
+    return;
+  }
+
+  // 入力値の数だけ番号を文字列として格納した配列を作成
+  const array = Array.from({ length: inputValue }, (_, i) => String(i + 1));
+
+  // 配列をJSON文字列に変換してlocalStorageに保存
+  localStorage.setItem("numberArray", JSON.stringify(array));
+  alert("データがlocalStorageに保存されました: " + JSON.stringify(array));
+}
+
+// localStorageの中にinitialValueという名前が存在していれば、
+if (localStorage.getItem("initialValue")) {
+  // initialValueがあれば、initialValueから値を取得して、変数valueに代入する
+  value = localStorage.getItem("initialValue");
+  // 変数valueの中身をdiv(ID initialValue)に表示する
+  $("#initialValue").val(value);
+}
+
+// 読み込み
+for (let i = 0; i < localStorage.length; i++) {
+  const key = localStorage.key(i);
+  const value = localStorage.getItem(key);
+  const html = `
+      <li>
+        <p>${key}</p>
+        <p>${value}</p><br>
+      </li>
+      <br>
+    `;
+  $("#initialValue").append(html);
+}
+
 // 1.Saveボタンクリックで localStorageに保管する
 $("#save_memo").on("click", function () {
   //text_areaの値（Value）を取得 → 変数valueに代入
@@ -99,8 +140,10 @@ const remainder = numParticipants % 3;
 
 // 参加者数の分、ナンバーを用意
 let numbers = Array.from({ length: numParticipants }, (_, i) => i + 1);
-console.log("配列としてのnumbers初期値：", numbers);
 
+$("#numParticipants").on("click", function () {
+  $("#textArea").val(numbers);
+});
 //
 // let participants = [];
 // let len = array.length;
@@ -116,8 +159,6 @@ for (let i = numbers - 1; i > 0; i--) {
 
 // numbers = numbers.sort(() => Math.random() - 0.5);
 
-console.log("ランダムに入れ替えた後のnumbers：", numbers);
-
 // 数字の並びを、配列に入れる
 // let count = 0;
 
@@ -130,16 +171,15 @@ function generateGrid() {
   // ID値 tableContainer に一致する要素を戻り値として返す
   // const tableContainer = document.getElementById("tableContainer");
   // ID値 tableContainer に一致する要素を戻り値として返す
-  const tableContainerBody = document.getElementById("tableContainerBody");
+  const tableContainer = document.getElementById("tableContainer");
 
   // 表の中身をクリア
-  tableContainerBody.innerHTML = "";
+  tableContainer.innerHTML = "";
   // document.createElement(tagName) 引数のtagNameで指定されたHTML要素を生成する
   // table要素を生成
   const table = document.createElement("table");
   table.style.borderCollapse = "collapse";
-  // テーブルにIDを付与
-  // table.id = "generatedTable";
+
   // 繰り返し処理で表のcellに中身を入れる
   let count = 0;
   for (let i = 0; i < group_num; i++) {
@@ -158,23 +198,39 @@ function generateGrid() {
     table.appendChild(row);
   }
   // 表をtableContainerに追加
-  tableContainerBody.appendChild(table);
+  tableContainer.appendChild(table);
+
+  // localStorageに保管する
+  function save_first() {
+    //tableContainerの値（Value）を取得 → 変数valueに代入
+    value = $("#tableContainer").val();
+    //localStorageに"first"という名前をつけて、変数valueの中身をセットする
+    localStorage.setItem("first", tableContainer.outerHTML);
+    alert("1回目を保存しました。");
+  }
 }
 
 // 2回目
 function shiftSecondColumn() {
   // ID値 tableContainer2 に一致する要素を返す
-  const table = document.getElementById("generatedTable");
-  if (!table) return;
-  const rows = Array.from(table.rows);
-  const secondColumnValues = rows.map((row) => row.cells[1].textContent);
+  const tableContainer2 = document.getElementById("tableContainer2");
+  // 表の中身に一旦１回目の値を入れる
+  tableContainer2.innerHTML = tableContainer.innerHTML;
+  // document.createElement(tagName) 引数のtagNameで指定されたHTML要素を生成する
+  // table要素を生成
+  const table2 = document.createElement("table");
+  if (!table2) return;
+  const rows2 = Array.from(table2.rows);
+  const secondColumnValues = rows2.map((rows2) => rows2.cells[1].textContent);
 
   // 2列目の値を一つ下にシフト（最後の値は最初に移動）
   secondColumnValues.unshift(secondColumnValues.pop());
+  console.table(table2);
+  console.table(secondColumnValues);
 
   // シフト後の値を2列目に設定
-  rows.forEach((row, i) => {
-    row.cells[1].textContent = secondColumnValues[i];
+  rows2.forEach((rows2, i) => {
+    rows2.cells[1].textContent = secondColumnValues[i];
   });
 }
 
