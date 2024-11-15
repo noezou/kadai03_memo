@@ -57,15 +57,13 @@
         min="9"
         step="3"
       />
-      <div class="buttonArea">
-        <button onclick="saveArray_0()">初期値を保存</button>
-        <button id="save_memo">memoだけセーブ</button>
-        <button id="save">タイトルと内容をセーブ</button>
-        <button id="clear_memo">memoだけ削除</button>
-        <button id="clear">全て削除</button>
-      </div>
 
-      <div id="initialValue">保存した初期値を表示します:</div>
+      <button onclick="saveArray_0()">初期値を保存</button>
+      <div id="initialValue">
+        保存した初期値を表示します:
+        <p id="initialValueP"></p>
+      </div>
+      <button id="clearArray_0">初期値を削除</button>
 
       <!-- 
       <button onclick="startAnimation()">整列開始</button>

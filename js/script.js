@@ -1,5 +1,14 @@
 $("main").slideDown(500);
 
+// 参加者数
+const numParticipants = document.getElementById("numParticipants");
+// 参加者数を3で割った整数値＝グループの数＝表の行数
+const group_num = Math.floor(numParticipants / 3);
+// グループの最大人数＝表の列数＝4 参加者が3の倍数でなかった場合は、observerに1人ずつ加え4人1組とする。
+const group_size_max = 4;
+// 余りを算出する （0,1,2のいずれかになる）
+const remainder = numParticipants % 3;
+
 function saveArray_0() {
   // 入力値を取得し数値に変換
   const inputElement = document.getElementById("numParticipants");
@@ -17,15 +26,24 @@ function saveArray_0() {
   // 配列をJSON文字列に変換してlocalStorageに保存
   localStorage.setItem("numberArray", JSON.stringify(array));
   alert("データがlocalStorageに保存されました: " + JSON.stringify(array));
+
+  // localStorageの中にinitialValueという名前が存在していれば、
+  if (localStorage.getItem("numberArray")) {
+    // numberArrayがあれば値を取得して、変数valueに代入する
+    value = JSON.parse(localStorage.getItem("numberArray"));
+    // 変数valueの中身をdiv(ID initialValue)に表示する
+    $("#initialValueP").append(value);
+  }
 }
 
-// localStorageの中にinitialValueという名前が存在していれば、
-if (localStorage.getItem("initialValue")) {
-  // initialValueがあれば、initialValueから値を取得して、変数valueに代入する
-  value = localStorage.getItem("initialValue");
-  // 変数valueの中身をdiv(ID initialValue)に表示する
-  $("#initialValue").val(value);
-}
+$("#clearArray_0").on("click", function () {
+  //localStorageの"numberArray"という名前の中身を削除する
+  localStorage.removeItem("numberArray");
+  alert("初期値を削除しました");
+  document.getElementById("initialValueP").innerHTML = "";
+  // numParticipantsを空文字で上書きする;
+  $("#numParticipants").val("");
+});
 
 // 読み込み
 for (let i = 0; i < localStorage.length; i++) {
@@ -36,9 +54,8 @@ for (let i = 0; i < localStorage.length; i++) {
         <p>${key}</p>
         <p>${value}</p><br>
       </li>
-      <br>
     `;
-  $("#initialValue").append(html);
+  $("#firstValue").append(html);
 }
 
 // 1.Saveボタンクリックで localStorageに保管する
@@ -56,14 +73,8 @@ $("#save").on("click", function () {
   const value = $("#text").val();
   localStorage.setItem(key, value);
   const html = `
-  <table id="key_and_value_output">
-  <tbody>
-  <tr>
-  <td>${key}</td>
-  <td>${value}</td>
-  </tr>
-  </tbody>
-  </table>
+  <p>${key}</p>
+  <p>${value}</p>
     `;
   alert("タイトルと内容を全て保存しました");
   $("#key_and_value_output").append(html);
@@ -131,20 +142,9 @@ if (localStorage.getItem("memo")) {
 // let currentRound = 0;
 // let groupAssignments = [];
 
-// 参加者数を3で割った整数値＝グループの数＝表の行数
-const group_num = Math.floor(numParticipants / 3);
-// グループの最大人数＝表の列数＝4 参加者が3の倍数でなかった場合は、observerに1人ずつ加え4人1組とする。
-const group_size_max = 4;
-// 余りを算出する （0,1,2のいずれかになる）
-const remainder = numParticipants % 3;
-
 // 参加者数の分、ナンバーを用意
 let numbers = Array.from({ length: numParticipants }, (_, i) => i + 1);
 
-$("#numParticipants").on("click", function () {
-  $("#textArea").val(numbers);
-});
-//
 // let participants = [];
 // let len = array.length;
 
