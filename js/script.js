@@ -165,14 +165,34 @@ for (let i = numbers - 1; i > 0; i--) {
 // for (let j = 0; j < group_size_max; j++) {
 //   const cell = numbers[count++];
 // }
+function a() {
+  let num = 1;
+  generateGrid(num);
+}
 
+function b() {
+  let num = 2;
+  generateGrid(num);
+}
+
+function c() {
+  let num = 3;
+  generateGrid(num);
+}
 // 表をHTML表示させる関数
-function generateGrid() {
+function generateGrid(num) {
   // ID値 tableContainer に一致する要素を戻り値として返す
   // const tableContainer = document.getElementById("tableContainer");
-  // ID値 tableContainer に一致する要素を戻り値として返す
-  const tableContainer = document.getElementById("tableContainer");
+  // ID値 tableContainer に一致する要素を戻り値として返す;
 
+  console.log(1);
+  if (num == 1) {
+    let tableContainer = document.getElementById("tableContainer");
+  } else if (num == 2) {
+    tableContainer = document.getElementById("tableContainer2");
+  } else if (num == 3) {
+    tableContainer = document.getElementById("tableContainer3");
+  }
   // 表の中身をクリア
   tableContainer.innerHTML = "";
   // document.createElement(tagName) 引数のtagNameで指定されたHTML要素を生成する
