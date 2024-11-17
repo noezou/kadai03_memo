@@ -47,23 +47,30 @@ $("#clearArray_0").on("click", function () {
 });
 
 // 読み込み
-for (let i = 0; i < localStorage.length; i++) {
-  const key = localStorage.key(i);
-  const value = localStorage.getItem(key);
-  const html = `
-      <li>
-        <p>${key}</p>
-        <p>${value}</p><br>
-      </li>
-    `;
-  $("#firstValue").append(html);
-}
+// for (let i = 0; i < localStorage.length; i++) {
+//   const key = localStorage.key(i);
+//   const value = localStorage.getItem(key);
+//   const html = `
+//       <li>
+//         <p>${key}</p>
+//         <p>${value}</p><br>
+//       </li>
+//     `;
+//   $("#firstValue").append(html);
+// }
 
-// 表をHTML表示させる関数
+// 振り分け用 ＊＊＊＊＊＊＊＊＊＊＊＊＊
+// 参加者用 配列
+let participants = [];
+// 役割
+let roles = ["speaker", "listener", "observer"];
+// 何回目の振り分けかのカウント用
+let currentRound = 0;
+// どのグループに参加することになったか
+let groupAssignments = [];
+
+// ＊＊＊ 1回目 ＊＊＊
 function generateGrid() {
-  // ID値 tableContainer に一致する要素を戻り値として返す
-  // const tableContainer = document.getElementById("tableContainer");
-  // ID値 tableContainer に一致する要素を戻り値として返す;
   const numParticipants = parseInt(
     document.getElementById("numParticipants").value
   );
@@ -72,68 +79,56 @@ function generateGrid() {
     return;
   }
 
+  const tableRows = numParticipants / 3;
+  const tableCols = 3;
   let numbers = Array.from({ length: numParticipants }, (_, i) => i + 1);
 
   // ランダムに並べ替える
   numbers = numbers.sort(() => Math.random() - 0.5);
 
+  // 表を生成
   // ID値 tableContainer に一致する要素を返す
   const tableContainer = document.getElementById("tableContainer");
-
-  // 表の中身をクリア
   tableContainer.innerHTML = "";
+  // 表の中身をクリア
   // document.createElement(tagName) 引数のtagNameで指定されたHTML要素を生成する
-  // table要素を生成
-  const table = document.createElement("table");
+  const table = document.createElement("table"); // table要素を生成
   table.style.borderCollapse = "collapse";
   table.id = "generatedTable"; // テーブルにIDを付与
-
-  // 繰り返し処理で表のcellに中身を入れる
-  count = 0;
-  for (let i = 0; i < group_num; i++) {
+  // 表を書く
+  let count = 0;
+  for (let i = 0; i < tableRows; i++) {
     const row = document.createElement("tr");
-    for (let j = 0; j < group_size; j++) {
+    for (let j = 0; j < tableCols; j++) {
       const cell = document.createElement("td");
       cell.style.border = "1px solid black";
       cell.style.padding = "10px";
       cell.style.textAlign = "center";
-      // innerHTMLプロパティで要素の中身を変更する
       cell.innerHTML = numbers[count++];
-      // cellの最後の要素としてrowに追加
-      row.appendChild(cell);
+      row.appendChild(cell); // cellの最後の要素としてrowに追加
     }
-    // rowの最後の要素としてtableに追加
-    table.appendChild(row);
+    table.appendChild(row); // rowの最後の要素としてtableに追加
   }
-  // 表をtableContainerに追加
-  tableContainer.appendChild(table);
+  tableContainer.appendChild(table); // 表をtableContainerに追加
 }
 
-// 2回目
+// ＊＊＊ 2回目 ＊＊＊
 function shiftSecondColumn() {
-  // ID値 tableContainer2 に一致する要素を返す
-  const tableContainer2 = document.getElementById("tableContainer2");
-  // 表の中身に一旦１回目の値を入れる
-  tableContainer2.innerHTML = tableContainer.innerHTML;
-  // document.createElement(tagName) 引数のtagNameで指定されたHTML要素を生成する
-  // table要素を生成
-  const table2 = document.createElement("table");
-  if (!table2) return;
-  const rows2 = Array.from(table2.rows);
-  const secondColumnValues = rows2.map((rows2) => rows2.cells[1].textContent);
+  const table = document.getElementById("generatedTable");
+  if (!table) return;
+  const rows = Array.from(table.rows);
+  const secondColumnValues = rows.map((row) => row.cells[1].textContent);
 
   // 2列目の値を一つ下にシフト（最後の値は最初に移動）
   secondColumnValues.unshift(secondColumnValues.pop());
-  console.table(table2);
-  console.table(secondColumnValues);
 
   // シフト後の値を2列目に設定
-  rows2.forEach((rows2, i) => {
-    rows2.cells[1].textContent = secondColumnValues[i];
+  rows.forEach((row, i) => {
+    row.cells[1].textContent = secondColumnValues[i];
   });
 }
 
-// 3回目
+// ＊＊＊ 3回目 ＊＊＊
 function shiftThirdColumn() {
   const table = document.getElementById("generatedTable");
   if (!table) return;
